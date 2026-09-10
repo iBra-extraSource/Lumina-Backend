@@ -9,6 +9,7 @@ const clinicRoutes = require("./routes/clinicRoutes");
 const patientRoutes = require("./routes/patientRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
 const aiRoutes = require("./routes/aiRoutes");
+const predictionRoutes = require("./routes/predictionRoutes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/clinics", clinicRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/uploads", uploadRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/predictions", predictionRoutes);
 
 app.get("/", (req, res) => {
   res.send("Lumina backend is running");
