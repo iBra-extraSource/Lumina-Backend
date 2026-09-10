@@ -4,11 +4,16 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+const userRoutes = require("./routes/userRoutes");
+const clinicRoutes = require("./routes/clinicRoutes");
+const patientRoutes = require("./routes/patientRoutes");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use("/api/users", userRoutes);
+app.use("/api/patients", patientRoutes);
+app.use("/api/clinics", clinicRoutes);
 app.get("/", (req, res) => {
   res.send("Lumina backend is running");
 });
