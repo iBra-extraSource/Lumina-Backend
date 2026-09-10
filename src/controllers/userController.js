@@ -78,7 +78,41 @@ async function loginUser(req, res) {
   }
 }
 
+async function getUserById(req, res) {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      `SELECT
+        id,
+        full_name,
+        date_of_birth,
+        email,
+        gender,
+        created_at
+       FROM users
+       WHERE id = $1`,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to get user",
+    });
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
+  getUserById,
 };
